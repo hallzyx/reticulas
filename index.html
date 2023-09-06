@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&family=Bruno+Ace+SC&family=Changa:wght@300;500&family=Josefin+Sans:ital@0;1&family=Kalam:wght@400;700&family=Lato:ital,wght@0,700;1,700&family=Outfit:wght@300;400;600&family=Roboto+Condensed:ital,wght@0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&family=Share&family=Share+Tech&family=Ubuntu:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    
+
+    <title>Trabajo_parcial[M.Discreta]</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://cdn.discordapp.com/attachments/853778717674831892/1147215358609080350/pngfind.com-upc-png-6686523.png" alt="logo">
+        <nav>
+            <ul>
+                <li><a href="">Glosario</a></li>
+                <li><a href="">Fuentes Bibliograficas</a></li>
+                <li><a href="">Casa de estudios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <h1>Reticulas_2023-2</h1>
+    <main>
+
+        <div class="box_1">
+            <section class="step_1">
+                <h3>1.Introducir el conjunto:</h3>
+                <p>Inserte los elementos de la matriz deseada separados en comas</p>
+                <p>Estos pueden ser tanto elementos como numeros:</p>
+                <p>Ejm1: A={1,2,3,4,5}</p>
+                <p>Ejm2: A={a,b,c,d,e}</p>
+                
+
+                <div class="box_conjunto">
+                    <p>A={ </p> 
+                    <div class="entrada_de_datos_box boxinput">
+                       <input class="entrada_input textInput" type="text" value="1,2,3,4,5" placeholder="1,2,3,4,5">
+                    </div>
+                    <p> }</p>
+                    
+                    <button><span class="text">Aceptar</span></button>
+                </div>
+                
+
+                <p class="rpta_conjunto ocultar_utility">El conjunto dado es: A={ <span></span> }</p> 
+        
+            </section>
+            <section class="step_2 ocultar_utility" >
+                <h3>2.Inserte la relacion deseada:</h3>
+                <p>Ejm:R={(1,2),(3,1),(5,4)}</p>
+
+                <div class="box_conjunto">
+                    <p>R={ </p> 
+                        <div class="entrada_de_datos_box2 boxinput">
+                            <input class="entrada_input textInput" type="text" placeholder="(1,4),(5,4),(3,3),(4,4),(4,2)">
+                        </div>
+                        <p> }</p>  
+                        
+                        <button><span class="text">Gravar</span></button>
+                     
+                </div>
+                <button id="relacion_random">¿Deseas generar una relación aleatoria? Click Aquí</button>
+                
+            </section>
+                
+        </div>
+        <div class="box_2 ocultar_utility" >
+            <h3>3.Representacion<br> de la matriz:</h3>
+            <section class="step_3 ">
+    
+                <table>
+                    <tbody>
+        
+                    </tbody>
+                </table>
+
+                <p class="rpta_reflexiva">Es reflexiva:</p>
+                <p class="rpta_antisimetrica">Es simétrica:</p>
+            </section>
+        </div>
+       
+    </main>
+    
+    
+
+
+    <script src="core.js"></script>
+</body>
+</html>
