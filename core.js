@@ -9,7 +9,7 @@ const tabla_matriz=document.querySelector("tbody");
 
 let rpta_reflexiva=document.querySelector(".rpta_reflexiva");
 let rpta_antisimetrica=document.querySelector(".rpta_antisimetrica");
-
+let rpta_transitiva=document.querySelector(".rpta_transitiva");
 
 let capturar_datos;
 let n_elementos=1;
@@ -17,9 +17,15 @@ let n_elementos=1;
 let elementos_conjunto=[];
 let elementos_relacion=[];
 let elementos_matriz  =[];
+let elementos_matriz_prueba=[]
+
 
 btn[0].addEventListener("click",()=>{
 
+
+    elementos_matriz  =[];
+    elementos_matriz_prueba=[];
+    
     n_elementos=1;
     capturar_datos=datos[0].value;
 
@@ -44,8 +50,10 @@ btn[0].addEventListener("click",()=>{
 
     for(let i=0;i<elementos_conjunto.length;i++){
         elementos_matriz.push([]);
+        elementos_matriz_prueba.push([]);
     };
 
+    
 
     if(elementos_conjunto.length>10 || elementos_conjunto.length<4){
         alert("Numero de parametros no permitido, debes ingresar entre 4 a 10 elementos");
@@ -112,7 +120,8 @@ btn[1].addEventListener("click",()=>{
         for(let j=0;j<elementos_conjunto.length;j++){
             for(let k=0; k<elementos_relacion.length;k=k+2){
                 let par_ordenado="("+elementos_relacion[k]+","+elementos_relacion[k+1]+")";
-
+                console.log(par_ordenado);
+                console.log("("+elementos_conjunto[i]+","+elementos_conjunto[j]+")");
                 if(par_ordenado=="("+elementos_conjunto[i]+","+elementos_conjunto[j]+")"){
                     elementos_matriz[i][j]=1;
                     
@@ -146,7 +155,7 @@ btn[1].addEventListener("click",()=>{
 
     comprobar_reflexiva();
     comprobar_antisimetrica();
-
+    comprobar_transitiva();
     box_2.classList.remove("ocultar_utility");
 
 
@@ -194,6 +203,52 @@ const comprobar_antisimetrica=()=>{
     else{
         rpta_antisimetrica.textContent="Es antisimétrica: Sí";
     }
+};
+
+const comprobar_transitiva=()=>{
+    
+    let token=0;
+    for(let i=0;i<elementos_conjunto.length;i++){
+            
+        for (let j = 0; j < elementos_conjunto.length; j++) {
+            let token=0;
+            for (let k = 0; k < elementos_conjunto.length; k++) {
+                if(elementos_matriz[i][token+k]==elementos_matriz[token+k][j] && elementos_matriz[i][token+k]==1){
+                    elementos_matriz_prueba[i][j]=1;
+                    break;
+                }
+                else{
+                    elementos_matriz_prueba[i][j]=0;
+                }
+                //token++;
+            }
+            
+        };
+    };
+    console.log(elementos_matriz);
+    console.log(elementos_matriz_prueba)
+
+   if(comparar_matrices()){
+    rpta_transitiva.textContent="Es transitiva: Sí";
+   }
+   else{
+    rpta_transitiva.textContent="Es transitiva: No";
+   }
+   
+};
+
+const comparar_matrices=()=>{
+    for(let i=0;i<elementos_conjunto.length;i++){
+        for (let k = 0; k < elementos_conjunto.length; k++) {
+
+            if(elementos_matriz[i][k]!=elementos_matriz_prueba[i][k]){
+                return false;
+            }
+            
+        };
+    };
+
+    return true;
 };
 
 
