@@ -10,6 +10,7 @@ const tabla_matriz=document.querySelector("tbody");
 let rpta_reflexiva=document.querySelector(".rpta_reflexiva");
 let rpta_antisimetrica=document.querySelector(".rpta_antisimetrica");
 let rpta_transitiva=document.querySelector(".rpta_transitiva");
+let rpta_ordenParcial=document.querySelector(".rpta_ordenParcial");
 
 let capturar_datos;
 let n_elementos=1;
@@ -25,7 +26,7 @@ btn[0].addEventListener("click",()=>{
 
     elementos_matriz  =[];
     elementos_matriz_prueba=[];
-    
+
     n_elementos=1;
     capturar_datos=datos[0].value;
 
@@ -156,6 +157,8 @@ btn[1].addEventListener("click",()=>{
     comprobar_reflexiva();
     comprobar_antisimetrica();
     comprobar_transitiva();
+
+    comprobar_ordenParcial();
     box_2.classList.remove("ocultar_utility");
 
 
@@ -249,6 +252,21 @@ const comparar_matrices=()=>{
     };
 
     return true;
+};
+
+const comprobar_ordenParcial=()=>{
+    console.log(rpta_reflexiva.textContent=="Es reflexiva: Sí");
+    console.log( rpta_antisimetrica.textContent=="Es antisimétrica: Sí");
+    console.log(rpta_transitiva.textContent=="Es transitiva: Sí");
+    console.log(rpta_ordenParcial.textContent);
+    if(rpta_reflexiva.textContent=="Es reflexiva: Sí" &&
+        rpta_antisimetrica.textContent=="Es antisimétrica: Sí" &&
+        rpta_transitiva.textContent=="Es transitiva: Sí"){
+            rpta_ordenParcial.textContent="Es de orden parcial: Sí";
+        }
+        else{
+            rpta_ordenParcial.textContent="Es de orden parcial: No";
+        }
 };
 
 
