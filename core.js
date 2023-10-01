@@ -20,6 +20,12 @@ let elementos_relacion=[];
 let elementos_matriz  =[];
 let elementos_matriz_prueba=[]
 
+let maincavas=document.querySelector("#main-canvas");
+let ctx=maincavas.getContext("2d");
+
+let x,y;
+let x1,y2;
+
 
 btn[0].addEventListener("click",()=>{
 
@@ -163,9 +169,273 @@ btn[1].addEventListener("click",()=>{
 
 
 
+    //Transformando a diagrama de hasse matriz
+    
+
+    let matriz_hasse=elementos_matriz.slice();
+    let matriz_hasse_prueba=[];
+    let matriz_hasse_definitivo=elementos_matriz.slice();
+
+    for(let i=0;i<elementos_conjunto.length;i++){
+        matriz_hasse[i][i]=0;
+    }
+
+    console.log(matriz_hasse);
+
+
+    for(let i=0;i<elementos_conjunto.length;i++){
+        matriz_hasse_prueba.push([]);
+    };
+
+
+        for(let i=0;i<elementos_conjunto.length;i++){
+                
+            for (let j = 0; j < elementos_conjunto.length; j++) {
+                let token=0;
+                for (let k = 0; k < elementos_conjunto.length; k++) {
+                    if(matriz_hasse[i][token+k]==matriz_hasse[token+k][j] && matriz_hasse[i][token+k]==1){
+                        matriz_hasse_prueba[i][j]=1;
+                        break;
+                    }
+                    else{
+                        matriz_hasse_prueba[i][j]=0;
+                    }
+                    //token++;
+                }
+                
+            };
+        };
+    
+    console.log(matriz_hasse_prueba);  
+
+    for(let i=0;i<elementos_conjunto.length;i++){
+                
+        for (let j = 0; j < elementos_conjunto.length; j++) {
+            
+            if(matriz_hasse_prueba[i][j]==1){
+                matriz_hasse_definitivo[i][j]=0;
+            }
+            
+        };
+    };
+
+    console.log(matriz_hasse_definitivo);
+    let diccionario_relaciones={};
+    let token_ordenamiento=[];
+    for(let llave of elementos_conjunto){
+        diccionario_relaciones[llave]=0;
+    }
+
+
+    for(let i=0;i<elementos_conjunto.length;i++){
+                
+        for (let j = 0; j < elementos_conjunto.length; j++) {
+            
+            if(matriz_hasse_definitivo[i][j]==1){
+                diccionario_relaciones[elementos_conjunto[j]]++;
+            }
+            
+        };
+    };
+
+    token_ordenamiento=Object.entries(diccionario_relaciones);
+    token_ordenamiento.sort((a, b) => b[1] - a[1]);
+    
+    
+   
+
+    console.log(diccionario_relaciones);
+    console.log(token_ordenamiento);
+
+    ctx.clearRect(0, 0, maincavas.width, maincavas.height);
+
+    draw(token_ordenamiento, n_elementos);
 
 });
 
+
+
+
+const draw=(token_ordenamiento, n_elementos)=>{
+
+    let x1;
+    let y1;
+
+    let x2;
+    let y2;
+
+    let x3;
+    let y3;
+    
+    let x4;
+    let y4;
+
+    let x5;
+    let y5;
+
+    let x6;
+    let y6;
+
+
+    switch (n_elementos) {
+        case 4:
+            // Establece el color y grosor de la línea
+            ctx.strokeStyle = "rgb(255, 176, 227)";
+            ctx.lineWidth = 2;
+
+            ctx.font = '20px Arial'; // Establecer la fuente y el tamaño de fuente
+            ctx.fillStyle = 'white'; // Color del texto
+            ctx.textAlign = 'center'; // Alineación horizontal del texto (centro)
+            
+            x1 = 200;
+            y1 = 70;
+        
+            x2 = 120;
+            y2 = 150;
+        
+            x3 = 200;
+            y3 = 230;
+            
+            x4 = 280;
+            y4 = 150;
+
+            // Dibuja la línea
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineTo(x3, y3);
+            ctx.lineTo(x4, y4);
+            ctx.lineTo(x1, y1);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(255, 176, 227)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(x1, y1, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Alineación vertical del texto (medio)
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(token_ordenamiento[0][0], x1, y1 - 5 - 5);
+
+            ctx.beginPath();
+            ctx.arc(x2, y2, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+
+            ctx.fillText(token_ordenamiento[1][0], x2 -5 -15, y2 +5 +5);
+
+            ctx.beginPath();
+            ctx.arc(x3, y3, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.textBaseline = 'top';
+            ctx.fillText(token_ordenamiento[3][0], x3, y3 +5 +5);
+
+
+            ctx.beginPath();
+            ctx.arc(x4, y4, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillText(token_ordenamiento[2][0], x4 +5 +15, y4 -5 -5);
+    
+            break;
+    
+        case 6:
+            ctx.strokeStyle = "rgb(255, 176, 227)";
+            ctx.lineWidth = 2;
+
+            ctx.font = '20px Arial'; // Establecer la fuente y el tamaño de fuente
+            ctx.fillStyle = 'white'; // Color del texto
+            ctx.textAlign = 'center'; // Alineación horizontal del texto (centro)
+
+            x1 = 200;
+            y1 = 50;
+        
+            x2 = 120;
+            y2 = 130;
+        
+            x3 = 120;
+            y3 = 210;
+
+            x4 = 200;
+            y4 = 290;
+            
+            x5 = 280;
+            y5 = 210;
+
+            x6 = 280;
+            y6 = 130;
+  
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.lineTo(x3, y3);
+            ctx.lineTo(x4, y4);
+            ctx.lineTo(x5, y5);
+            ctx.lineTo(x6, y6);
+            ctx.lineTo(x1, y1);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgb(255, 176, 227)";
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.arc(x1, y1, 5, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Alineación vertical del texto (medio)
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(token_ordenamiento[0][0], x1, y1 - 5 - 5);
+
+            ctx.beginPath();
+            ctx.arc(x2, y2, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+
+            ctx.fillText(token_ordenamiento[1][0], x2 -5 -15, y2 +5 +5);
+
+            ctx.beginPath();
+            ctx.arc(x3, y3, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+
+            ctx.fillText(token_ordenamiento[3][0], x3 -5 -15, y3 +5 +5);
+
+
+            ctx.beginPath();
+            ctx.arc(x4, y4, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.textBaseline = 'top';
+            ctx.fillText(token_ordenamiento[5][0], x4, y4 +5 +5);
+
+
+            ctx.beginPath();
+            ctx.arc(x5, y5, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillText(token_ordenamiento[4][0], x5 +5 +15, y5 -5 -5);
+            
+            ctx.beginPath();
+            ctx.arc(x6, y6, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillText(token_ordenamiento[2][0], x6 +5 +15, y6 -5 -5);
+
+
+
+        default:
+            break;
+    }
+
+
+
+
+    
+
+    
+};
 
 
 

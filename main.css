@@ -309,3 +309,8 @@ main{
 .ocultar_utility{
     display: none;
 }
+
+
+.diagrama{
+  background-color: rgba(217, 0, 255, 0.271);
+}
