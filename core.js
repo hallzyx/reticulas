@@ -12,6 +12,11 @@ let rpta_antisimetrica=document.querySelector(".rpta_antisimetrica");
 let rpta_transitiva=document.querySelector(".rpta_transitiva");
 let rpta_ordenParcial=document.querySelector(".rpta_ordenParcial");
 
+
+let grafico_box=document.querySelector(".grafico_box");
+let datos_diagrama_f1=document.querySelector(".fila_1");
+let datos_diagrama_f2=document.querySelector(".fila_2");
+
 let capturar_datos;
 let n_elementos=1;
 
@@ -26,7 +31,7 @@ let ctx=maincavas.getContext("2d");
 let x,y;
 let x1,y2;
 
-
+let es_reticula;
 btn[0].addEventListener("click",()=>{
 
 
@@ -249,7 +254,12 @@ btn[1].addEventListener("click",()=>{
 
     ctx.clearRect(0, 0, maincavas.width, maincavas.height);
 
-    draw(token_ordenamiento, n_elementos);
+    if(es_reticula){
+        draw(token_ordenamiento, n_elementos);
+        grafico_box.classList.remove("ocultar_utility");
+    }
+    
+    
 
 });
 
@@ -339,6 +349,38 @@ const draw=(token_ordenamiento, n_elementos)=>{
 
             ctx.fillText(token_ordenamiento[2][0], x4 +5 +15, y4 -5 -5);
     
+            let p_1=document.createElement("p");
+            let p_2=document.createElement("p");
+            let p_3=document.createElement("p");
+            let p_4=document.createElement("p");
+
+            p_1.textContent= `Complemento de ${token_ordenamiento[0][0]}: ${token_ordenamiento[3][0]}`;
+            datos_diagrama_f2.appendChild(p_1);
+
+            p_2.textContent= `Complemento de ${token_ordenamiento[3][0]}: ${token_ordenamiento[0][0]}`;
+            datos_diagrama_f2.appendChild(p_2);
+
+            p_3.textContent= `Complemento de ${token_ordenamiento[1][0]}: ${token_ordenamiento[2][0]}`;
+            datos_diagrama_f2.appendChild(p_3);
+
+            p_4.textContent= `Complemento de ${token_ordenamiento[2][0]}: ${token_ordenamiento[1][0]}`;
+            datos_diagrama_f2.appendChild(p_4);
+
+
+            let p0=document.createElement("p");
+            let p1=document.createElement("p");
+            let p2=document.createElement("p");
+            
+            p0.innerHTML=`Es una reticula<br><br>`;
+
+            p1.textContent=`Elemento-> máximo: ${token_ordenamiento[0][0]}`;
+            p2.textContent=`Elemento-> mínimo: ${token_ordenamiento[3][0]}`;
+
+            datos_diagrama_f1.appendChild(p0);
+            datos_diagrama_f1.appendChild(p1);
+            datos_diagrama_f1.appendChild(p2);
+
+
             break;
     
         case 6:
@@ -422,6 +464,7 @@ const draw=(token_ordenamiento, n_elementos)=>{
             ctx.fill();
 
             ctx.fillText(token_ordenamiento[2][0], x6 +5 +15, y6 -5 -5);
+
 
 
 
@@ -533,9 +576,11 @@ const comprobar_ordenParcial=()=>{
         rpta_antisimetrica.textContent=="Es antisimétrica: Sí" &&
         rpta_transitiva.textContent=="Es transitiva: Sí"){
             rpta_ordenParcial.textContent="Es de orden parcial: Sí";
+            es_reticula=true;
         }
         else{
             rpta_ordenParcial.textContent="Es de orden parcial: No";
+            es_reticula=false;
         }
 };
 

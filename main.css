@@ -310,7 +310,33 @@ main{
     display: none;
 }
 
-
-.diagrama{
-  background-color: rgba(217, 0, 255, 0.271);
+.grafico_box{
+  display: flex;
+  justify-content: center;
+  background-color: rgba(217, 0, 255, 0.166);
 }
+
+.grafico_box .diagrama{
+  background-color: rgba(0, 0, 0, 0.371);
+  border-radius: 15px;
+  margin: 10px;
+  margin-right: 50px;
+}
+
+.grafico_box .datos{
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 50px;
+  margin: 40px;
+}
+.grafico_box .datos .fila_1{
+  margin-right: 30px;
+}
+
+
+.grafico_box .datos .fila_2{
+  margin-left: 30px;
+}
+
